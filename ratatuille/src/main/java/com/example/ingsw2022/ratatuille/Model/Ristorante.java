@@ -97,8 +97,4 @@ public class Ristorante {
     public void setCamerieri(Set<Cameriere> camerieri) {
         this.camerieri = camerieri;
     }
-    
-
-    
-
 }
