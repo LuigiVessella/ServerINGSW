@@ -44,8 +44,8 @@ public class AdminController {
     public @ResponseBody String adminLogin(@RequestParam String email){
         Admin admin = new Admin();
         admin = adminRepository.findByEmailAddress(email);
-        if(admin.getNome().isEmpty()) return "Utente non esiste";
-        else return "utente esiste";
+        if(admin != null) return "Utente esiste";
+        else return "utente non esiste";
     }
 
     
