@@ -1,7 +1,9 @@
 package com.example.ingsw2022.ratatuille.Model;
 
+import java.util.List;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -17,11 +19,11 @@ public class Admin {
     private String cognome;
     private String email;
 
-    @OneToMany(mappedBy = "proprietario")
-    private Set<Ristorante> ristoranti;
+    @OneToMany(mappedBy = "proprietario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ristorante> ristoranti;
     
 
-    public Admin(String partita_iva, String nome, String cognome, String email, Set<Ristorante> ristoranti) {
+    public Admin(String partita_iva, String nome, String cognome, String email, List<Ristorante> ristoranti) {
         this.partita_iva = partita_iva;
         this.nome = nome;
         this.cognome = cognome;
@@ -66,11 +68,11 @@ public class Admin {
         this.email = email;
     }
 
-    public Set<Ristorante> getRistoranti() {
+    public List<Ristorante> getRistoranti() {
         return this.ristoranti;
     }
 
-    public void setRistoranti(Set<Ristorante> ristoranti) {
+    public void setRistoranti(List<Ristorante> ristoranti) {
         this.ristoranti = ristoranti;
     }
 

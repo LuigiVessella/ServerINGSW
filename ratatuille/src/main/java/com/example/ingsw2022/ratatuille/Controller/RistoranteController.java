@@ -1,5 +1,6 @@
 package com.example.ingsw2022.ratatuille.Controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,7 +13,7 @@ import com.example.ingsw2022.ratatuille.Repository.AdminRepository;
 import com.example.ingsw2022.ratatuille.Repository.RistoranteRepository;
 
 @RestController
-@RequestMapping("/ristoranti")
+@RequestMapping("/ristorante")
 public class RistoranteController {
     private final RistoranteRepository ristoranteRepository;
     private final AdminRepository adminRepository;
@@ -23,7 +24,10 @@ public class RistoranteController {
         
     }
 
-
+    @GetMapping("getAll")
+    public @ResponseBody Iterable<Ristorante> getAllRistoranti() {
+        return ristoranteRepository.findAll();
+    }
 
     //per il momento prende l'email, poi si passa alla p.iva
     @PostMapping("/addNew")
@@ -37,6 +41,7 @@ public class RistoranteController {
             ristorante.setCoperti(Integer.parseInt(coperti));
             ristorante.setLocazione(locazione);
             ristorante.setProprietario(admin);
+            admin.getRistoranti().add(ristorante);
             ristoranteRepository.save(ristorante);
             return "Ristorante salvato correttamente";
         }

@@ -1,10 +1,7 @@
 package com.example.ingsw2022.ratatuille.Model;
 
 import java.util.Set;
-
-import org.springframework.boot.autoconfigure.web.WebProperties.Resources.Chain.Strategy;
-
-import jakarta.annotation.Generated;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,6 +25,7 @@ public class Ristorante {
 
     @ManyToOne
     @JoinColumn(name = "partita_iva")
+    @JsonIgnore
     private Admin proprietario; 
     
 
