@@ -5,14 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.0</version>
+		<version>3.0.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example.ingsw2022</groupId>
 	<artifactId>ratatuille</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0BETA</version>
 	<name>ratatuille</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Il server per il progetto ratatuille 2023</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

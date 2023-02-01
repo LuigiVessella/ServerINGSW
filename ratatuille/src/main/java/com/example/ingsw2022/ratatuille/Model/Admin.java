@@ -1,8 +1,6 @@
 package com.example.ingsw2022.ratatuille.Model;
 
 import java.util.List;
-import java.util.Set;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
