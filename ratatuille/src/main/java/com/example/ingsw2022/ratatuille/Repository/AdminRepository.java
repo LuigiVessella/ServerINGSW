@@ -13,6 +13,6 @@ public interface AdminRepository extends JpaRepository <Admin, String> {
     Admin findByPartitaIva(String partitaIva);
 
 
-    
+   
 
 }

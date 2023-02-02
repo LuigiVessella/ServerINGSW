@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ingsw2022.ratatuille.Model.Admin;
+import com.example.ingsw2022.ratatuille.Model.Ristorante;
 import com.example.ingsw2022.ratatuille.Repository.AdminRepository;
 
 import jakarta.websocket.OnError;
-
 
 @RestController
 @RequestMapping("/admin")
@@ -46,6 +46,15 @@ public class AdminController {
         admin = adminRepository.findByEmailAddress(email);
         if(admin != null) return "Utente esiste";
         else return "utente non esiste";
+    }
+
+    @GetMapping("/getRistoranti")
+    public @ResponseBody Iterable<Ristorante> getRistorantiProprietario(@RequestParam String email) {
+
+        Admin admin = new Admin();
+        admin = adminRepository.findByEmailAddress(email);
+        return admin.getRistoranti();
+
     }
 
     
