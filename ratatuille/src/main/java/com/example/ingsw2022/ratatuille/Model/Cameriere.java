@@ -1,67 +1,30 @@
 package com.example.ingsw2022.ratatuille.Model;
 
+import java.util.List;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
-public class Cameriere {
-
-    @Id
-    private String codice_fiscale;
-
-    private String nome;
-
-    private String cognome;
-
-    private String email;
-
+public class Cameriere extends Lavoratore {
 
     @ManyToOne
     @JoinColumn(name = "codice_ristorante")
-    private Ristorante ristorante;
+    @JsonIgnore
+    private Ristorante ristorante; 
 
-    public Cameriere(){}
-    public Cameriere(String codice_fiscale, String nome, String cognome, String email, Ristorante ristorante) {
-        this.codice_fiscale = codice_fiscale;
-        this.nome = nome;
-        this.cognome = cognome;
-        this.email = email;
-        this.ristorante = ristorante;
-    }
+    //private int numeroOrdini;
 
+    @OneToMany(mappedBy = "cameriere",  cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ordine> ordini;
 
-    public String getCodice_fiscale() {
-        return this.codice_fiscale;
-    }
-
-    public void setCodice_fiscale(String codice_fiscale) {
-        this.codice_fiscale = codice_fiscale;
-    }
-
-    public String getNome() {
-        return this.nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCognome() {
-        return this.cognome;
-    }
-
-    public void setCognome(String cognome) {
-        this.cognome = cognome;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public Cameriere() {
     }
 
     public Ristorante getRistorante() {
@@ -71,7 +34,5 @@ public class Cameriere {
     public void setRistorante(Ristorante ristorante) {
         this.ristorante = ristorante;
     }
-
-
 
 }

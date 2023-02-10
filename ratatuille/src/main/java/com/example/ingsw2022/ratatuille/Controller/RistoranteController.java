@@ -29,6 +29,7 @@ public class RistoranteController {
         return ristoranteRepository.findAll();
     }
 
+    
     //per il momento prende l'email, poi si passa alla p.iva
     @PostMapping("/addNew")
     public @ResponseBody String addNewRistorante(@RequestParam String email, @RequestParam String nome, @RequestParam String coperti, @RequestParam String locazione) {
@@ -51,3 +52,4 @@ public class RistoranteController {
 
     
 }
+

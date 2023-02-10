@@ -1,7 +1,10 @@
 package com.example.ingsw2022.ratatuille.Model;
 
+import java.util.List;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,15 +32,15 @@ public class Ristorante {
     private Admin proprietario; 
     
 
-    @OneToMany(mappedBy = "ristorante")
-    private Set<Cameriere> camerieri;
+    @OneToMany(mappedBy = "ristorante",  cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Cameriere> camerieri;
 
 
     public Ristorante() {
     }
 
 
-    public Ristorante(Long codice_ristorante, String nome, int coperti, String locazione, Admin proprietario, Set<Cameriere> camerieri) {
+    public Ristorante(Long codice_ristorante, String nome, int coperti, String locazione, Admin proprietario, List<Cameriere> camerieri) {
         this.codice_ristorante = codice_ristorante;
         this.nome = nome;
         this.coperti = coperti;
@@ -88,11 +91,11 @@ public class Ristorante {
         this.proprietario = proprietario;
     }
 
-    public Set<Cameriere> getCamerieri() {
+    public List<Cameriere> getDipendenti() {
         return this.camerieri;
     }
 
-    public void setCamerieri(Set<Cameriere> camerieri) {
+    public void setCamerieri(List<Cameriere> camerieri) {
         this.camerieri = camerieri;
     }
 }
