@@ -20,7 +20,7 @@ public class Ordine {
     private int numeroTavolo;
     private int numeroPortate;
     
-    private boolean evaso;
+    private boolean evaso = false;
     private String evasoDa;
 
     @ManyToOne

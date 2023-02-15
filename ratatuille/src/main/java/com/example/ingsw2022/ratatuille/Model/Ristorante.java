@@ -1,9 +1,7 @@
 package com.example.ingsw2022.ratatuille.Model;
 
 import java.util.List;
-import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -47,6 +45,7 @@ public class Ristorante {
         this.locazione = locazione;
         this.proprietario = proprietario;
         this.camerieri = camerieri;
+        
     }
 
 
