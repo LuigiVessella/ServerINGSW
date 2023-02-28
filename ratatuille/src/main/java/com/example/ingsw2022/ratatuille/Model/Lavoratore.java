@@ -8,7 +8,6 @@ import jakarta.persistence.MappedSuperclass;
 public abstract class Lavoratore {
     @Id
     private String codiceFiscale; 
-
     
     private String nome;
     private String cognome;

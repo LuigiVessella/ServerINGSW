@@ -15,7 +15,7 @@ public class Cameriere extends Lavoratore {
     @JoinColumn(name = "codice_ristorante")
     @JsonIgnore
     private Ristorante ristorante; 
-
+    
     //private int numeroOrdini;
 
     @OneToMany(mappedBy = "cameriere",  cascade = CascadeType.ALL, orphanRemoval = true)
@@ -32,4 +32,11 @@ public class Cameriere extends Lavoratore {
         this.ristorante = ristorante;
     }
 
+    public List<Ordine> getOrdini() {
+        return this.ordini;
+    }
+
+    public void setOrdini(List<Ordine> ordini) {
+        this.ordini = ordini;
+    }
 }

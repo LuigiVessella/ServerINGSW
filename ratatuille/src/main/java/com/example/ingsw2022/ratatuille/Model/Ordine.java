@@ -24,7 +24,7 @@ public class Ordine {
     private String evasoDa;
 
     @ManyToOne
-    @JoinColumn(name = "email")
+    @JoinColumn(name = "codiceFiscale")
     @JsonIgnore
     private Cameriere cameriere; 
 

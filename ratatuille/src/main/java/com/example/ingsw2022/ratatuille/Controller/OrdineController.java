@@ -1,5 +1,7 @@
 package com.example.ingsw2022.ratatuille.Controller;
 
+import java.util.Optional;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,8 +32,9 @@ public class OrdineController {
     }
 
     @PostMapping("/addNew")
-    public @ResponseBody String addNewOrder(@RequestParam String email, @RequestParam int numeroTavolo, @RequestParam int numeroPortate){
-        Cameriere cameriere = cameriereRepository.findByEmailAddress(email);
+    public @ResponseBody String addNewOrder(@RequestParam String codiceFiscale, @RequestParam int numeroTavolo, @RequestParam int numeroPortate){
+        Optional<Cameriere> cameriereOpt = cameriereRepository.findById(codiceFiscale);
+        Cameriere cameriere = cameriereOpt.get();
         Ordine ordine = new Ordine();
         ordine.setCameriere(cameriere);
         ordine.setNumeroTavolo(numeroTavolo);
