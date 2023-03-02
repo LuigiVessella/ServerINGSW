@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ingsw2022.ratatuille.Model.Admin;
+import com.example.ingsw2022.ratatuille.Model.Cameriere;
 import com.example.ingsw2022.ratatuille.Model.Ristorante;
 import com.example.ingsw2022.ratatuille.Repository.AdminRepository;
+import com.example.ingsw2022.ratatuille.Repository.CameriereRepository;
 
 import jakarta.websocket.OnError;
 
@@ -19,9 +21,11 @@ import jakarta.websocket.OnError;
 public class AdminController {
 
     private final AdminRepository adminRepository;
+    private final CameriereRepository cameriereRepository;
 
-    public AdminController(AdminRepository adminRepository) {
+    public AdminController(AdminRepository adminRepository, CameriereRepository cameriereRepository) {
         this.adminRepository = adminRepository;
+        this.cameriereRepository = cameriereRepository;
     }
 
     @GetMapping("/getAll")
@@ -50,14 +54,23 @@ public class AdminController {
     @PostMapping("/login") 
     public @ResponseBody String adminLogin(@RequestParam String email, @RequestParam String hashedPassword){
         Admin admin = new Admin();
+        Cameriere cameriere = new Cameriere();
         admin = adminRepository.findByEmailAddress(email);
-        if(admin != null){
+        if(admin == null) {
+            cameriere = cameriereRepository.findByEmailAddress(email);
+            if(cameriere != null) {
+                if(cameriere.getHashedPassword().equals(hashedPassword))
+                    return "cameriere";
+            }
+        }
+        else {
             if(admin.getHashedPassword().equals(hashedPassword)){
-                return "loggato";
+                return "admin";
             }
             else return "password errata";
         }
-        else return "utente non esiste";
+        
+        return "utente non esiste";
     }
 
     @PostMapping("/getRistoranti")

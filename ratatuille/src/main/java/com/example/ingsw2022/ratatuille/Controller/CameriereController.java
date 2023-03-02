@@ -34,12 +34,13 @@ public class CameriereController {
     }    
 
     @PostMapping("/addNew")
-    public @ResponseBody String addNewCameriere(@RequestParam Long codiceRistorante, @RequestParam String codiceFiscale, @RequestParam String nome, @RequestParam String cognome, @RequestParam String email){
+    public @ResponseBody String addNewCameriere(@RequestParam Long codiceRistorante, @RequestParam String codiceFiscale, @RequestParam String nome, @RequestParam String cognome, @RequestParam String email, @RequestParam String hashedPassword){
         Optional<Ristorante> ristoranteOpt = ristoranteRepository.findById(codiceRistorante);
         Ristorante ristorante = ristoranteOpt.get();
         Cameriere cameriere = new Cameriere();
         cameriere.setCodiceFiscale(codiceFiscale);
         cameriere.setNome(nome);
+        cameriere.setHashedPassword(hashedPassword);
         cameriere.setCognome(cognome);
         cameriere.setEmail(email);
         cameriere.setRistorante(ristorante);

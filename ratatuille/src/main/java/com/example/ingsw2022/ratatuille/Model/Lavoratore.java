@@ -16,6 +16,9 @@ public abstract class Lavoratore {
     private String email;
 
     private String hashedPassword;
+    private String firstPassword; 
+
+
 
     public Lavoratore() {
     }
@@ -58,6 +61,15 @@ public abstract class Lavoratore {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+
+    public String getFirstPassword() {
+        return this.firstPassword;
+    }
+
+    public void setFirstPassword(String firstPassword) {
+        this.firstPassword = firstPassword;
     }
 
 }
