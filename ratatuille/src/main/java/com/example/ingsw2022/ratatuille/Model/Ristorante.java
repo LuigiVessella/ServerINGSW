@@ -10,6 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+
 
 @Entity
 public class Ristorante {
@@ -28,10 +30,13 @@ public class Ristorante {
     @JoinColumn(name = "partita_iva")
     @JsonIgnore
     private Admin proprietario; 
-    
+
 
     @OneToMany(mappedBy = "ristorante",  cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Cameriere> camerieri;
+
+    @OneToOne(mappedBy = "ristorante", cascade=CascadeType.ALL, orphanRemoval=true)
+    private Supervisore supervisore;
 
 
     public Ristorante() {
