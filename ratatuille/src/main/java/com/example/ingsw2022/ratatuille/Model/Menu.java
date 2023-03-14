@@ -1,10 +1,14 @@
 package com.example.ingsw2022.ratatuille.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Menu {
@@ -24,6 +28,11 @@ public class Menu {
     private String contiene;
 
     private String prezzo;
+
+    @ManyToOne
+    @JoinColumn(name = "codice_ristorante")
+    @JsonIgnore
+    private Ristorante ristorante; 
 
 
 
@@ -80,6 +89,17 @@ public class Menu {
     public void setPrezzo(String prezzo) {
         this.prezzo = prezzo;
     }
+
+
+    public Ristorante getRistorante() {
+        return this.ristorante;
+    }
+
+    public void setRistorante(Ristorante ristorante) {
+        this.ristorante = ristorante;
+    }
+
+
 
 
 }

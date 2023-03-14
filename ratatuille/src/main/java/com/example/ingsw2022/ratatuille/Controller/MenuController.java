@@ -1,5 +1,6 @@
 package com.example.ingsw2022.ratatuille.Controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +37,16 @@ public class MenuController {
         }
         menuRepository.save(menu);
         return "piatto salvato";
+    }
+
+    @GetMapping("/getMenu")
+    public @ResponseBody Menu getMenu(@RequestParam String codice_ristorante){
+        Menu menu = new Menu();
+        //menu = menuRepository.findAllById(null);
+        
+        
+        
+        return menu;
     }
 
 

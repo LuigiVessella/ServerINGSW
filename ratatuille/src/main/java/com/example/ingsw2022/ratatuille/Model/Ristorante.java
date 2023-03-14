@@ -31,9 +31,11 @@ public class Ristorante {
     @JsonIgnore
     private Admin proprietario; 
 
-
     @OneToMany(mappedBy = "ristorante",  cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Cameriere> camerieri;
+
+    @OneToMany(mappedBy = "ristorante",  cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Menu> menu;
 
     @OneToOne(mappedBy = "ristorante", cascade=CascadeType.ALL, orphanRemoval=true)
     private Supervisore supervisore;
@@ -52,7 +54,6 @@ public class Ristorante {
         this.camerieri = camerieri;
         
     }
-
 
 
     public Long getCodice_ristorante() {
@@ -101,5 +102,26 @@ public class Ristorante {
 
     public void setCamerieri(List<Cameriere> camerieri) {
         this.camerieri = camerieri;
+    }
+
+    public List<Cameriere> getCamerieri() {
+        return this.camerieri;
+    }
+
+
+    public List<Menu> getMenu() {
+        return this.menu;
+    }
+
+    public void setMenu(List<Menu> menu) {
+        this.menu = menu;
+    }
+
+    public Supervisore getSupervisore() {
+        return this.supervisore;
+    }
+
+    public void setSupervisore(Supervisore supervisore) {
+        this.supervisore = supervisore;
     }
 }
