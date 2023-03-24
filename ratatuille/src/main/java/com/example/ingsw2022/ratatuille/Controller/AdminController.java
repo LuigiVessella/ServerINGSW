@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ingsw2022.ratatuille.Model.Admin;
 import com.example.ingsw2022.ratatuille.Model.Cameriere;
-import com.example.ingsw2022.ratatuille.Model.Ristorante;
+import com.example.ingsw2022.ratatuille.Model.Lavoratore;
 import com.example.ingsw2022.ratatuille.Repository.AdminRepository;
 import com.example.ingsw2022.ratatuille.Repository.CameriereRepository;
 
@@ -52,7 +52,7 @@ public class AdminController {
     }
 
     @PostMapping("/login") 
-    public @ResponseBody String adminLogin(@RequestParam String email, @RequestParam String hashedPassword){
+    public @ResponseBody Lavoratore adminLogin(@RequestParam String email, @RequestParam String hashedPassword){
         Admin admin = new Admin();
         Cameriere cameriere = new Cameriere();
         admin = adminRepository.findByEmailAddress(email);
@@ -60,27 +60,19 @@ public class AdminController {
             cameriere = cameriereRepository.findByEmailAddress(email);
             if(cameriere != null) {
                 if(cameriere.getHashedPassword().equals(hashedPassword))
-                    return "cameriere";
+                    return cameriere;
             }
         }
         else {
             if(admin.getHashedPassword().equals(hashedPassword)){
-                return "admin";
+                return admin;
             }
-            else return "password errata";
+            else return null;
         }
         
-        return "utente non esiste";
+        return null;
     }
 
-    @PostMapping("/getRistoranti")
-    public @ResponseBody Iterable<Ristorante> getRistorantiProprietario(@RequestParam String email) {
-
-        Admin admin = new Admin();
-        admin = adminRepository.findByEmailAddress(email);
-        return admin.getRistoranti();
-
-    }
 
     @PostMapping("/setNewNome")
     public @ResponseStatus int setNewNome(@RequestParam String email, @RequestParam String nome){

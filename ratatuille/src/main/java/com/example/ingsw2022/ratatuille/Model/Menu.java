@@ -19,6 +19,10 @@ public class Menu {
 
     private String nome_piatto;
 
+    private String tipo; //primo, secondo, dessert, ecc
+    private String tipoPietanza; //pesce, carne, ecc
+    //quindi primo di pesce, secondo di carne, ecc
+
     @Column(columnDefinition="TEXT", length = 2048)
     private String descrizione;
 
@@ -98,6 +102,25 @@ public class Menu {
     public void setRistorante(Ristorante ristorante) {
         this.ristorante = ristorante;
     }
+
+
+    
+    public String getTipo() {
+        return this.tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getTipoPietanza() {
+        return this.tipoPietanza;
+    }
+
+    public void setTipoPietanza(String tipoPietanza) {
+        this.tipoPietanza = tipoPietanza;
+    }
+
 
 
 

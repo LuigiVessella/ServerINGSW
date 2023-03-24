@@ -35,6 +35,10 @@ public class Ristorante {
     private List<Cameriere> camerieri;
 
     @OneToMany(mappedBy = "ristorante",  cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AdettoCucina> adettiCucina;
+
+
+    @OneToMany(mappedBy = "ristorante",  cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Menu> menu;
 
     @OneToOne(mappedBy = "ristorante", cascade=CascadeType.ALL, orphanRemoval=true)
@@ -124,4 +128,13 @@ public class Ristorante {
     public void setSupervisore(Supervisore supervisore) {
         this.supervisore = supervisore;
     }
+
+    public List<AdettoCucina> getAdettiCucina() {
+        return this.adettiCucina;
+    }
+
+    public void setAdettiCucina(List<AdettoCucina> adettiCucina) {
+        this.adettiCucina = adettiCucina;
+    }
+
 }

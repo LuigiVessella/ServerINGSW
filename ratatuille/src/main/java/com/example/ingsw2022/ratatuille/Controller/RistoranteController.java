@@ -1,17 +1,12 @@
 package com.example.ingsw2022.ratatuille.Controller;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.ingsw2022.ratatuille.Model.Admin;
-import com.example.ingsw2022.ratatuille.Model.Cameriere;
 import com.example.ingsw2022.ratatuille.Model.Ristorante;
 import com.example.ingsw2022.ratatuille.Repository.AdminRepository;
 import com.example.ingsw2022.ratatuille.Repository.RistoranteRepository;
@@ -53,14 +48,6 @@ public class RistoranteController {
         else return "Errore nel salvataggio dei dati ristorante";
         
     }
-
-    @PostMapping("/getCamerieri")
-    public @ResponseBody List<Cameriere> getCamerieri(@RequestParam Long codiceRistorante){
-        Optional<Ristorante> ristoranti = ristoranteRepository.findById(codiceRistorante);
-        Ristorante ristorante = ristoranti.get();
-        return ristorante.getDipendenti();
-    }
-
 
     
 }
