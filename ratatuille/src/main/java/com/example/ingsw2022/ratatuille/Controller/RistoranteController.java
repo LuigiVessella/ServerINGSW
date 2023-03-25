@@ -1,5 +1,7 @@
 package com.example.ingsw2022.ratatuille.Controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +33,7 @@ public class RistoranteController {
     
     //per il momento prende l'email, poi si passa alla p.iva
     @PostMapping("/addNew")
-    public @ResponseBody String addNewRistorante(@RequestParam String email, @RequestParam String nome, @RequestParam String coperti, @RequestParam String locazione) {
+    public @ResponseBody Admin addNewRistorante(@RequestParam String email, @RequestParam String nome, @RequestParam String coperti, @RequestParam String locazione) {
 
         Admin admin = new Admin();
         admin = adminRepository.findByEmailAddress(email);
@@ -41,11 +43,16 @@ public class RistoranteController {
             ristorante.setCoperti(Integer.parseInt(coperti));
             ristorante.setLocazione(locazione);
             ristorante.setProprietario(admin);
+            ristorante.setCamerieri(null);
+            ristorante.setMenu(null);
+            ristorante.setAdettiCucina(null);
+            ristorante.setSupervisore(null);
             admin.getRistoranti().add(ristorante);
+            
             ristoranteRepository.save(ristorante);
-            return "Ristorante salvato correttamente";
+            return admin;
         }
-        else return "Errore nel salvataggio dei dati ristorante";
+        else return null;
         
     }
 

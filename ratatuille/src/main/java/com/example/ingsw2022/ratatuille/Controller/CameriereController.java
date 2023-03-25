@@ -31,6 +31,11 @@ public class CameriereController {
     @GetMapping("/getAll")
     public @ResponseBody List<Cameriere> getAllCamerieri() {
         return cameriereRepository.findAll();
+    }
+
+    @GetMapping("/getRistorante")
+    public @ResponseBody Ristorante getRistoranteFromCameriere(){
+        return cameriereRepository.findAll().get(1).getRistorante();
     }    
 
     @PostMapping("/addNew")
