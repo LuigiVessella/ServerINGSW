@@ -1,6 +1,10 @@
 package com.example.ingsw2022.ratatuille.Controller;
 
+import java.util.Optional;
+
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -83,21 +87,15 @@ public class AdminController {
         return 200;
     }
 
-    @PostMapping("/changeCredentials")
-    public @ResponseStatus int changeCredentials(@RequestParam String emailOld,@RequestParam String emailNew,@RequestParam String pass){
-        Admin admin = new Admin();
-        admin = adminRepository.findByEmailAddress(emailOld);
-        if(emailNew != null){
+    @PatchMapping("/changeEmail/{id}")
+    public @ResponseBody Admin changeCredentials(@PathVariable String id, @RequestParam String emailNew){
+        Optional<Admin> adminOpt = adminRepository.findById(id);
+        Admin admin = adminOpt.get();
+        if(admin != null) {
             admin.setEmail(emailNew);
-            adminRepository.save(admin);
-            return 200;
+            return adminRepository.save(admin);
         }
-        else if(pass != null){
-            admin.setHashedPassword(pass);
-            adminRepository.save(admin);
-            return 200;
-        }
-        else return 400;
+       else return null;
     }
     
     @OnError 

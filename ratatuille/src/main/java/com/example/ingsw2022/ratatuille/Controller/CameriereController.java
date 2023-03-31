@@ -33,15 +33,14 @@ public class CameriereController {
         return cameriereRepository.findAll();
     }
 
-    @GetMapping("/getRistorante")
-    public @ResponseBody Ristorante getRistoranteFromCameriere(){
-        return cameriereRepository.findAll().get(1).getRistorante();
-    }    
 
     @PostMapping("/addNew")
     public @ResponseBody Ristorante addNewCameriere(@RequestParam Long codiceRistorante, @RequestParam String codiceFiscale, @RequestParam String nome, @RequestParam String cognome, @RequestParam String email, @RequestParam String hashedPassword){
-        Ristorante ristorante = ristoranteRepository.findById(codiceRistorante);
-        
+       
+        Ristorante ristorante = null;
+        Optional<Ristorante> ristOp = ristoranteRepository.findById(codiceRistorante);
+        if(ristOp != null) ristorante = ristOp.get();
+
         if(ristorante != null) {
             Cameriere cameriere = new Cameriere();
             cameriere.setCodiceFiscale(codiceFiscale);
@@ -54,9 +53,8 @@ public class CameriereController {
             cameriereRepository.save(cameriere);
             
             return ristorante;
-
         }
 
         else return null;
-
+    }
 }
