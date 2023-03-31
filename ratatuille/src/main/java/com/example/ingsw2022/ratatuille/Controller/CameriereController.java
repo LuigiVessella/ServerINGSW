@@ -40,8 +40,7 @@ public class CameriereController {
 
     @PostMapping("/addNew")
     public @ResponseBody Ristorante addNewCameriere(@RequestParam Long codiceRistorante, @RequestParam String codiceFiscale, @RequestParam String nome, @RequestParam String cognome, @RequestParam String email, @RequestParam String hashedPassword){
-        Optional<Ristorante> ristoranteOpt = ristoranteRepository.findById(codiceRistorante);
-        Ristorante ristorante = ristoranteOpt.get();
+        Ristorante ristorante = ristoranteRepository.findById(codiceRistorante);
         
         if(ristorante != null) {
             Cameriere cameriere = new Cameriere();
@@ -55,10 +54,9 @@ public class CameriereController {
             cameriereRepository.save(cameriere);
             
             return ristorante;
+
         }
+
         else return null;
-    }
-
-
 
 }

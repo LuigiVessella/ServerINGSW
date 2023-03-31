@@ -83,6 +83,22 @@ public class AdminController {
         return 200;
     }
 
+    @PostMapping("/changeCredentials")
+    public @ResponseStatus int changeCredentials(@RequestParam String emailOld,@RequestParam String emailNew,@RequestParam String pass){
+        Admin admin = new Admin();
+        admin = adminRepository.findByEmailAddress(emailOld);
+        if(emailNew != null){
+            admin.setEmail(emailNew);
+            adminRepository.save(admin);
+            return 200;
+        }
+        else if(pass != null){
+            admin.setHashedPassword(pass);
+            adminRepository.save(admin);
+            return 200;
+        }
+        else return 400;
+    }
     
     @OnError 
     public @ResponseBody String onError(){
