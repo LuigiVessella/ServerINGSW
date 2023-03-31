@@ -53,7 +53,7 @@ public class CameriereController {
             cameriere.setRistorante(ristorante);
             cameriere.setOrdini(null);
             cameriereRepository.save(cameriere);
-            ristorante.getCamerieri().add(cameriere);
+            
             return ristorante;
         }
         else return null;

@@ -47,7 +47,6 @@ public class RistoranteController {
             ristorante.setMenu(null);
             ristorante.setAdettiCucina(null);
             ristorante.setSupervisore(null);
-            admin.getRistoranti().add(ristorante);
             
             ristoranteRepository.save(ristorante);
             return admin;
