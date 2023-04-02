@@ -1,14 +1,18 @@
 package com.example.ingsw2022.ratatuille.Model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+
 
 @Entity
 public class Menu {
@@ -17,66 +21,18 @@ public class Menu {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_menu;
 
-    private String nome_piatto;
-
-    private String tipo; //primo, secondo, dessert, ecc
-    private String tipoPietanza; //pesce, carne, ecc
-    //quindi primo di pesce, secondo di carne, ecc
-
-    @Column(columnDefinition="TEXT", length = 2048)
-    private String descrizione;
-
-    private String allergeni;
-
-    @Column(columnDefinition="TEXT", length = 2048)
-    private String contiene;
-
-    private String prezzo;
-
     @ManyToOne
     @JoinColumn(name = "codice_ristorante")
     @JsonIgnore
     private Ristorante ristorante; 
 
+    //Menu ha una lista di piatti
+    @OneToMany(mappedBy = "menu",  cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Piatto> portate;
 
+    private String tipo; 
+    private String lingua;  
 
-    public Menu() {
-
-    }
-
-
-
-    public String getNome_piatto() {
-        return this.nome_piatto;
-    }
-
-    public void setNome_piatto(String nome_piatto) {
-        this.nome_piatto = nome_piatto;
-    }
-
-    public String getDescrizione() {
-        return this.descrizione;
-    }
-
-    public void setDescrizione(String descrizione) {
-        this.descrizione = descrizione;
-    }
-
-    public String getAllergeni() {
-        return this.allergeni;
-    }
-
-    public void setAllergeni(String allergeni) {
-        this.allergeni = allergeni;
-    }
-
-    public String getContiene() {
-        return this.contiene;
-    }
-
-    public void setContiene(String contiene) {
-        this.contiene = contiene;
-    }
 
     public Long getId_menu() {
         return this.id_menu;
@@ -86,15 +42,6 @@ public class Menu {
         this.id_menu = id_menu;
     }
 
-    public String getPrezzo() {
-        return this.prezzo;
-    }
-
-    public void setPrezzo(String prezzo) {
-        this.prezzo = prezzo;
-    }
-
-
     public Ristorante getRistorante() {
         return this.ristorante;
     }
@@ -103,8 +50,15 @@ public class Menu {
         this.ristorante = ristorante;
     }
 
+    public List<Piatto> getPortate() {
+        return this.portate;
+    }
 
+    public void setPortate(List<Piatto> portate) {
+        this.portate = portate;
+    }
     
+
     public String getTipo() {
         return this.tipo;
     }
@@ -113,16 +67,12 @@ public class Menu {
         this.tipo = tipo;
     }
 
-    public String getTipoPietanza() {
-        return this.tipoPietanza;
+    public String getLingua() {
+        return this.lingua;
     }
 
-    public void setTipoPietanza(String tipoPietanza) {
-        this.tipoPietanza = tipoPietanza;
+    public void setLingua(String lingua) {
+        this.lingua = lingua;
     }
-
-
-
-
 
 }

@@ -38,7 +38,7 @@ public class OrdineController {
         Ordine ordine = new Ordine();
         ordine.setCameriere(cameriere);
         ordine.setNumeroTavolo(numeroTavolo);
-        ordine.setNumeroPortate(numeroPortate);
+
         return "ok";
     }
     

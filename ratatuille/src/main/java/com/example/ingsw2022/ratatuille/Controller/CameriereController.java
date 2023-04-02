@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.ingsw2022.ratatuille.Model.Cameriere;
 import com.example.ingsw2022.ratatuille.Model.Ristorante;
 import com.example.ingsw2022.ratatuille.Repository.CameriereRepository;
@@ -33,6 +32,17 @@ public class CameriereController {
         return cameriereRepository.findAll();
     }
 
+    @GetMapping("/getRistoranteCameriere")
+    public @ResponseBody Ristorante getRistoranteCameriere(@RequestParam String id) {
+
+        Optional<Cameriere> cameriereOpt = cameriereRepository.findById(id);
+        Cameriere cameriere = cameriereOpt.get();
+        if(cameriere != null){
+            return cameriere.getRistorante();
+        }
+        else return null;
+
+    }
 
     @PostMapping("/addNew")
     public @ResponseBody Ristorante addNewCameriere(@RequestParam Long codiceRistorante, @RequestParam String codiceFiscale, @RequestParam String nome, @RequestParam String cognome, @RequestParam String email, @RequestParam String hashedPassword){

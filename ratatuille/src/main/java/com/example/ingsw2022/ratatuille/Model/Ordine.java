@@ -1,13 +1,18 @@
 package com.example.ingsw2022.ratatuille.Model;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 
@@ -18,17 +23,21 @@ public class Ordine {
     private Long idOrdine;
 
     private int numeroTavolo;
-    private int numeroPortate;
-    
+
     private boolean evaso = false;
-    private String evasoDa;
+    private String evasoDa; //lista di chef
+
+    @OneToMany(mappedBy = "ordine",  cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Piatto> piattiOrdinati;
+
 
     @ManyToOne
     @JoinColumn(name = "codiceFiscale")
     @JsonIgnore
     private Cameriere cameriere; 
 
-    
+
+
     public Ordine() {
     }
     
@@ -75,14 +84,6 @@ public class Ordine {
 
     public void setNumeroTavolo(int numeroTavolo) {
         this.numeroTavolo = numeroTavolo;
-    }
-
-    public int getNumeroPortate() {
-        return this.numeroPortate;
-    }
-
-    public void setNumeroPortate(int numeroPortate) {
-        this.numeroPortate = numeroPortate;
     }
 
 

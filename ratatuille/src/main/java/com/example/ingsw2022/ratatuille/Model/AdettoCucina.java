@@ -1,7 +1,5 @@
 package com.example.ingsw2022.ratatuille.Model;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -14,7 +12,6 @@ public class AdettoCucina extends Lavoratore {
     @JoinColumn(name = "codice_ristorante")
     @JsonIgnore
     private Ristorante ristorante; 
-
 
     private int numeroOrdiniEvasi; 
     

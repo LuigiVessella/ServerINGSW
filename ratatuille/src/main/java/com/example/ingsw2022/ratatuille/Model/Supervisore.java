@@ -10,9 +10,7 @@ import jakarta.persistence.OneToOne;
 @Entity
 public class Supervisore extends Lavoratore{
 
-
     private int numeroAvvisi;
-
 
     @OneToOne
     @JoinColumn(name = "codice_ristorante")

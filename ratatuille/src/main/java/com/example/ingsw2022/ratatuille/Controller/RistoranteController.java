@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.ingsw2022.ratatuille.Model.Admin;
+import com.example.ingsw2022.ratatuille.Model.Menu;
 import com.example.ingsw2022.ratatuille.Model.Ristorante;
 import com.example.ingsw2022.ratatuille.Repository.AdminRepository;
 import com.example.ingsw2022.ratatuille.Repository.RistoranteRepository;
@@ -39,6 +40,7 @@ public class RistoranteController {
         admin = adminRepository.findByEmailAddress(email);
         if(admin != null) {
             Ristorante ristorante = new Ristorante();
+       
             ristorante.setNome(nome);
             ristorante.setCoperti(Integer.parseInt(coperti));
             ristorante.setLocazione(locazione);
@@ -47,7 +49,7 @@ public class RistoranteController {
             ristorante.setMenu(null);
             ristorante.setAdettiCucina(null);
             ristorante.setSupervisore(null);
-            
+                        
             ristoranteRepository.save(ristorante);
             return admin;
         }
