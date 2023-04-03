@@ -10,8 +10,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 
 @Entity
@@ -21,7 +22,7 @@ public class Menu {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_menu;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "codice_ristorante")
     @JsonIgnore
     private Ristorante ristorante; 
@@ -29,6 +30,9 @@ public class Menu {
     //Menu ha una lista di piatti
     @OneToMany(mappedBy = "menu",  cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Piatto> portate;
+
+    private String nome;
+
 
     private String tipo; 
     private String lingua;  
@@ -73,6 +77,14 @@ public class Menu {
 
     public void setLingua(String lingua) {
         this.lingua = lingua;
+    }
+
+    public String getNome() {
+        return this.nome;
+    }
+
+    public void setNome(String name) {
+        this.nome = name;
     }
 
 }

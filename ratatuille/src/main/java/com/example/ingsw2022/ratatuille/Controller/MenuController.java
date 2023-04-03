@@ -27,7 +27,7 @@ public class MenuController {
 
 
     @PostMapping("/addMenu")
-    public @ResponseBody Ristorante addNewMenu(@RequestParam Long codice_ristorante, @RequestParam String tipo, @RequestParam String lingua) {
+    public @ResponseBody Ristorante addNewMenu(@RequestParam Long codice_ristorante, @RequestParam String tipo, @RequestParam String lingua, @RequestParam String nome) {
                 
         Optional<Ristorante> ristoranteOpt = ristoranteRepository.findById(codice_ristorante);
         Ristorante ristorante = ristoranteOpt.get();
@@ -38,6 +38,7 @@ public class MenuController {
             menu.setRistorante(ristorante);
             menu.setPortate(null);
             menu.setTipo(tipo);
+            menu.setNome(nome);
             menuRepository.save(menu);
             return ristorante;
         }
