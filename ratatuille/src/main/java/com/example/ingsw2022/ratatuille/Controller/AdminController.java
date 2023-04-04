@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.ingsw2022.ratatuille.Model.Admin;
 import com.example.ingsw2022.ratatuille.Model.Cameriere;
 import com.example.ingsw2022.ratatuille.Model.Lavoratore;
+import com.example.ingsw2022.ratatuille.Model.Ristorante;
 import com.example.ingsw2022.ratatuille.Repository.AdminRepository;
 import com.example.ingsw2022.ratatuille.Repository.CameriereRepository;
 
@@ -68,6 +69,9 @@ public class AdminController {
         if(admin == null) {
             cameriere = cameriereRepository.findByEmailAddress(email);
             if(cameriere != null) {
+                Ristorante ristorante = cameriere.getRistorante();
+                cameriere.setRistorante(ristorante);
+                System.out.println("ristorante del cameriere:" + cameriere.getRistorante().getNome());
                 if(cameriere.getHashedPassword().equals(hashedPassword))
                     return cameriere;
             }

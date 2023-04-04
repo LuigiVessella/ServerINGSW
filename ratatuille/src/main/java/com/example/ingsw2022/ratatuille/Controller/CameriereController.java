@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,17 +33,6 @@ public class CameriereController {
         return cameriereRepository.findAll();
     }
 
-    @GetMapping("/getRistoranteCameriere")
-    public @ResponseBody Ristorante getRistoranteCameriere(@RequestParam String id) {
-
-        Optional<Cameriere> cameriereOpt = cameriereRepository.findById(id);
-        Cameriere cameriere = cameriereOpt.get();
-        if(cameriere != null){
-            return cameriere.getRistorante();
-        }
-        else return null;
-
-    }
 
     @PostMapping("/addNew")
     public @ResponseBody Ristorante addNewCameriere(@RequestParam Long codiceRistorante, @RequestParam String codiceFiscale, @RequestParam String nome, @RequestParam String cognome, @RequestParam String email, @RequestParam String hashedPassword){
@@ -66,5 +56,10 @@ public class CameriereController {
         }
 
         else return null;
+    }
+
+    @GetMapping("/getRistorante/{id}")
+    public @ResponseBody Ristorante getRistoranteCameriere(@PathVariable String id) {
+        return cameriereRepository.findById(id).get().getRistorante();
     }
 }
