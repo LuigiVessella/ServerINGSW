@@ -36,9 +36,8 @@ public class Ristorante {
     private List<Cameriere> camerieri;
 
     //1 a 1 
-    @OneToMany(mappedBy = "ristorante",  cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "ristorante",  cascade = CascadeType.ALL, orphanRemoval = true)
     private AdettoCucina adettoCucina;
-
 
 
     //ristorate ha lista di menu 1 a molti
