@@ -41,12 +41,12 @@ public class AdminController {
      
     @PostMapping("/addNew")
     public @ResponseBody String addNewAdmin(@RequestParam String codiceFiscale, @RequestParam String partitaIva, @RequestParam String nome, @RequestParam String cognome, @RequestParam String email, @RequestParam String hashedPassword) {
-        Admin admin = new Admin();
 
-        if(adminRepository.findByEmailAddress(email) != null) return "email_used";
-        if(adminRepository.findByPartitaIva(partitaIva) != null) return "piva_used";
-        if(adminRepository.findById(codiceFiscale) != null) return "codfisc_used";
+        if(adminRepository.findByEmailAddress(email).getEmail() != null) return "email_used";
+        if(adminRepository.findByPartitaIva(partitaIva).getPartita_iva() != null) return "piva_used";
+        if(adminRepository.findById(codiceFiscale).get().getCodiceFiscale() != null) return "codfisc_used";
         
+        Admin admin = new Admin();
         admin.setCodiceFiscale(codiceFiscale);
         admin.setPartita_iva(partitaIva);
         admin.setNome(nome);

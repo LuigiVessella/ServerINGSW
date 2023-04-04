@@ -46,7 +46,7 @@ public class RistoranteController {
             ristorante.setProprietario(admin);
             ristorante.setCamerieri(null);
             ristorante.setMenu(null);
-            ristorante.setAdettiCucina(null);
+            ristorante.setAdettoCucina(null);
             ristorante.setSupervisore(null);
                         
             ristoranteRepository.save(ristorante);

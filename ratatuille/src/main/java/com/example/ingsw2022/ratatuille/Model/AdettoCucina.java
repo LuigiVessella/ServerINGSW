@@ -2,13 +2,14 @@ package com.example.ingsw2022.ratatuille.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class AdettoCucina extends Lavoratore {
 
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "codice_ristorante")
     @JsonIgnore
     private Ristorante ristorante; 
