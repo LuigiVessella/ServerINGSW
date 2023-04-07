@@ -17,6 +17,7 @@ public class Admin extends Lavoratore{
     private List<Ristorante> ristoranti;
 
     public Admin() {
+        this.setRuolo("amministratore");
     }
 
     public List<Ristorante> getRistoranti() {

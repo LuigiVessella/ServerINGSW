@@ -38,6 +38,7 @@ public class Ordine {
 
 
     public Ordine() {
+    
     }
     
 

@@ -33,7 +33,7 @@ public class RistoranteController {
     
     //per il momento prende l'email, poi si passa alla p.iva
     @PostMapping("/addNew")
-    public @ResponseBody Admin addNewRistorante(@RequestParam String email, @RequestParam String nome, @RequestParam String coperti, @RequestParam String locazione) {
+    public @ResponseBody Admin addNewRistorante(@RequestParam String email, @RequestParam String nome, @RequestParam String coperti, @RequestParam String locazione, @RequestParam String telefono) {
 
         Admin admin = new Admin();
         admin = adminRepository.findByEmailAddress(email);
@@ -46,8 +46,9 @@ public class RistoranteController {
             ristorante.setProprietario(admin);
             ristorante.setCamerieri(null);
             ristorante.setMenu(null);
-            ristorante.setAdettoCucina(null);
+            ristorante.setAddettoCucina(null);
             ristorante.setSupervisore(null);
+            ristorante.setNumeroTelefono(telefono);
                         
             ristoranteRepository.save(ristorante);
             return admin;

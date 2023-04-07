@@ -17,6 +17,8 @@ public abstract class Lavoratore {
 
     private String hashedPassword;
     private String firstPassword; 
+    private String ruolo; //che può essere, admin, cameriere, addettocucina
+
 
 
 
@@ -71,5 +73,14 @@ public abstract class Lavoratore {
     public void setFirstPassword(String firstPassword) {
         this.firstPassword = firstPassword;
     }
+
+    public String getRuolo() {
+        return this.ruolo;
+    }
+
+    public void setRuolo(String ruolo) {
+        this.ruolo = ruolo;
+    }
+
 
 }

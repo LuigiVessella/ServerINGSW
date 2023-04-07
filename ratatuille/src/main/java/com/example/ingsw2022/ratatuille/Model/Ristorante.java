@@ -26,6 +26,30 @@ public class Ristorante {
 
     private String locazione;
 
+    private String numeroTelefono;
+
+    private boolean locTuristica;
+
+    public String getNumeroTelefono() {
+        return this.numeroTelefono;
+    }
+
+    public void setNumeroTelefono(String numeroTelefono) {
+        this.numeroTelefono = numeroTelefono;
+    }
+
+    public boolean isLocTuristica() {
+        return this.locTuristica;
+    }
+
+    public boolean getLocTuristica() {
+        return this.locTuristica;
+    }
+
+    public void setLocTuristica(boolean locTuristica) {
+        this.locTuristica = locTuristica;
+    }
+
     @ManyToOne
     @JoinColumn(name = "partita_iva")
     @JsonIgnore
@@ -37,7 +61,7 @@ public class Ristorante {
 
     //1 a 1 
     @OneToOne(mappedBy = "ristorante",  cascade = CascadeType.ALL, orphanRemoval = true)
-    private AdettoCucina adettoCucina;
+    private AddettoCucina addetto_cucina;
 
 
     //ristorate ha lista di menu 1 a molti
@@ -50,6 +74,7 @@ public class Ristorante {
 
 
     public Ristorante() {
+        this.locTuristica = false;
     }
 
 
@@ -104,10 +129,6 @@ public class Ristorante {
         this.proprietario = proprietario;
     }
 
-    public List<Cameriere> getDipendenti() {
-        return this.camerieri;
-    }
-
     public void setCamerieri(List<Cameriere> camerieri) {
         this.camerieri = camerieri;
     }
@@ -134,12 +155,12 @@ public class Ristorante {
     }
 
 
-    public AdettoCucina getAdettoCucina() {
-        return this.adettoCucina;
+    public AddettoCucina getAddettoCucina() {
+        return this.addetto_cucina;
     }
 
-    public void setAdettoCucina(AdettoCucina adettoCucina) {
-        this.adettoCucina = adettoCucina;
+    public void setAddettoCucina(AddettoCucina addetto_cucina) {
+        this.addetto_cucina = addetto_cucina;
     }
 
 
