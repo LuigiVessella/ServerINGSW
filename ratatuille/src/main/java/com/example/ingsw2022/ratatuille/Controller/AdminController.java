@@ -118,12 +118,23 @@ public class AdminController {
         return 200;
     }
 
-    @PatchMapping("/changeEmail/{id}")
-    public @ResponseBody Admin changeCredentials(@PathVariable String id, @RequestParam String emailNew){
+    @PostMapping("/changeEmail/{id}")
+    public @ResponseBody Admin changeEmail(@PathVariable String id, @RequestParam String emailNew){
         Optional<Admin> adminOpt = adminRepository.findById(id);
         Admin admin = adminOpt.get();
         if(admin != null) {
             admin.setEmail(emailNew);
+            return adminRepository.save(admin);
+        }
+       else return null;
+    }
+
+    @PostMapping("/changePassword/{id}")
+    public @ResponseBody Admin changePassword(@PathVariable String id, @RequestParam String passNew){
+        Optional<Admin> adminOpt = adminRepository.findById(id);
+        Admin admin = adminOpt.get();
+        if(admin != null) {
+            admin.setHashedPassword(passNew);
             return adminRepository.save(admin);
         }
        else return null;
