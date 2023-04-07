@@ -12,12 +12,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.ingsw2022.ratatuille.Model.AddettoCucina;
 import com.example.ingsw2022.ratatuille.Model.Admin;
 import com.example.ingsw2022.ratatuille.Model.Cameriere;
 import com.example.ingsw2022.ratatuille.Model.Lavoratore;
-
+import com.example.ingsw2022.ratatuille.Model.Supervisore;
+import com.example.ingsw2022.ratatuille.Repository.AddettoCucinaRepository;
 import com.example.ingsw2022.ratatuille.Repository.AdminRepository;
 import com.example.ingsw2022.ratatuille.Repository.CameriereRepository;
+import com.example.ingsw2022.ratatuille.Repository.SupervisoreRepository;
 
 import jakarta.websocket.OnError;
 
@@ -27,11 +30,17 @@ public class AdminController {
 
     private final AdminRepository adminRepository;
     private final CameriereRepository cameriereRepository;
+    private final SupervisoreRepository supervisoreRepository;
+    private final AddettoCucinaRepository addettoCucinaRepository;
 
-    public AdminController(AdminRepository adminRepository, CameriereRepository cameriereRepository) {
+
+    public AdminController(AdminRepository adminRepository, CameriereRepository cameriereRepository, SupervisoreRepository supervisoreRepository, AddettoCucinaRepository addettoCucinaRepository) {
         this.adminRepository = adminRepository;
         this.cameriereRepository = cameriereRepository;
+        this.supervisoreRepository = supervisoreRepository;
+        this.addettoCucinaRepository = addettoCucinaRepository;
     }
+
 
     @GetMapping("/getAll")
     public @ResponseBody Iterable<Admin> getAllProducts() {
@@ -65,14 +74,30 @@ public class AdminController {
     public @ResponseBody Lavoratore adminLogin(@RequestParam String email, @RequestParam String hashedPassword){
         Admin admin = new Admin();
         Cameriere cameriere = new Cameriere();
+        Supervisore supervisore = new Supervisore();
+        AddettoCucina addettoCucina = new AddettoCucina();
+
         admin = adminRepository.findByEmailAddress(email);
         if(admin == null) {
             cameriere = cameriereRepository.findByEmailAddress(email);
             if(cameriere != null) {
-                if(cameriere.getHashedPassword().equals(hashedPassword))
-                    return cameriere;
+                if(cameriere.getHashedPassword().equals(hashedPassword)) return cameriere;
+            }
+            else {
+                supervisore = supervisoreRepository.findByEmailAddress(email);
+                if(supervisore != null) {
+                    if(supervisore.getHashedPassword().equals(hashedPassword)) return supervisore;
+                }
+
+                else {
+                    addettoCucina = addettoCucinaRepository.findByEmailAddress(email);
+                    if(addettoCucina != null) {
+                        if(addettoCucina.getHashedPassword().equals(hashedPassword)) return addettoCucina;
+                    }
+                }
             }
         }
+
         else {
             if(admin.getHashedPassword().equals(hashedPassword)){
                 return admin;
