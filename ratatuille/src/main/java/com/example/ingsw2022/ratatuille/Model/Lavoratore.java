@@ -5,7 +5,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class Lavoratore {
+public class Lavoratore {
     @Id
     private String codiceFiscale; 
     

@@ -5,13 +5,14 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+
 
 @Entity
 
@@ -20,21 +21,23 @@ public class Ordine {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idOrdine;
-
     private int numeroTavolo;
-
-    private boolean evaso = false;
+    
+    private boolean evaso;
     private String evasoDa; //lista di chef
 
-    @OneToMany(mappedBy = "ordine",  cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Piatto> piattiOrdinati;
+    @Column(columnDefinition="TEXT", length = 2048)
+    private String piattiOrdinati;
+    
+    private boolean pagato;
+
+    private int conto;
 
 
     @ManyToOne
     @JoinColumn(name = "codiceFiscale")
     @JsonIgnore
     private Cameriere cameriere; 
-
 
 
     public Ordine() {
@@ -84,6 +87,35 @@ public class Ordine {
 
     public void setNumeroTavolo(int numeroTavolo) {
         this.numeroTavolo = numeroTavolo;
+    }
+
+
+    public String getPiattiOrdinati() {
+        return this.piattiOrdinati;
+    }
+
+    public void setPiattiOrdinati(String piattiOrdinati) {
+        this.piattiOrdinati = piattiOrdinati;
+    }
+
+    public boolean isPagato() {
+        return this.pagato;
+    }
+
+    public boolean getPagato() {
+        return this.pagato;
+    }
+
+    public void setPagato(boolean pagato) {
+        this.pagato = pagato;
+    }
+
+    public int getConto() {
+        return this.conto;
+    }
+
+    public void setConto(int conto) {
+        this.conto = conto;
     }
 
 

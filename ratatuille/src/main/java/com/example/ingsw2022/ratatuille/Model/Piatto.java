@@ -38,12 +38,7 @@ public class Piatto {
     @JsonIgnore
     private Menu menu; 
 
-    @ManyToOne
-    @JoinColumn(name = "id_ordine")
-    @JsonIgnore
-    private Ordine ordine; 
-
-
+ 
     public Piatto() {
 
     }
