@@ -59,6 +59,10 @@ public class Ristorante {
     @OneToMany(mappedBy = "ristorante",  cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Cameriere> camerieri;
 
+    //1 a molti
+    @OneToMany(mappedBy = "ristorante",  cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Avviso> avvisi;
+
     //1 a 1 
     @OneToOne(mappedBy = "ristorante",  cascade = CascadeType.ALL, orphanRemoval = true)
     private AddettoCucina addetto_cucina;

@@ -4,18 +4,21 @@ import java.sql.Date;
 import java.sql.Time;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Avviso {
 
     @Id 
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id_menu;
+    private Long id_avviso;
 
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date dataEmissione;
@@ -24,12 +27,18 @@ public class Avviso {
 
     private String descrizione;
 
-    private boolean letto = false;
+    private boolean letto;
 
     private Integer lettoCounter;
+
+    @ManyToOne
+    @JoinColumn(name = "codice_ristorante")
+    @JsonIgnore
+    private Ristorante ristorante; 
+    
    
     public Avviso(){
-
+        letto = false;
     }
 
 
