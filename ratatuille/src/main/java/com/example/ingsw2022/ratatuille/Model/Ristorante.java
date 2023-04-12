@@ -63,6 +63,22 @@ public class Ristorante {
     @OneToMany(mappedBy = "ristorante",  cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Avviso> avvisi;
 
+    public List<Avviso> getAvvisi() {
+        return this.avvisi;
+    }
+
+    public void setAvvisi(List<Avviso> avvisi) {
+        this.avvisi = avvisi;
+    }
+
+    public AddettoCucina getAddetto_cucina() {
+        return this.addetto_cucina;
+    }
+
+    public void setAddetto_cucina(AddettoCucina addetto_cucina) {
+        this.addetto_cucina = addetto_cucina;
+    }
+
     //1 a 1 
     @OneToOne(mappedBy = "ristorante",  cascade = CascadeType.ALL, orphanRemoval = true)
     private AddettoCucina addetto_cucina;
