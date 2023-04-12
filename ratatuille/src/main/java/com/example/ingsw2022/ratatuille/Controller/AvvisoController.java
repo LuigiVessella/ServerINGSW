@@ -2,7 +2,9 @@ package com.example.ingsw2022.ratatuille.Controller;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,5 +43,12 @@ public class AvvisoController {
         avvisoRepository.save(avviso);
         return getRistorante;
     } 
+
+
+    @GetMapping("/getAvvisi/{ristorante_id}")
+    public @ResponseBody List<Avviso> getAvvisi(@PathVariable Long ristorante_id) {
+        Ristorante ristorante = ristoranteRepository.findById(ristorante_id).get();
+        return ristorante.getAvvisi();
+    }
 
 }

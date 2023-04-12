@@ -1,6 +1,8 @@
 package com.example.ingsw2022.ratatuille.Controller;
 
 
+import java.time.LocalDate;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,6 +38,7 @@ public class OrdineController {
     public @ResponseBody Cameriere addNewOrder(@RequestBody Ordine ordine, @PathVariable String id_cameriere){
         Cameriere cameriere = cameriereRepository.findById(id_cameriere).get();
         ordine.setCameriere(cameriere);
+        ordine.setDataOrdine(LocalDate.now());
         ordineRepository.save(ordine);
         System.out.println(ordine.getCameriere().getCognome());
 

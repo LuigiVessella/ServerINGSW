@@ -1,6 +1,9 @@
 package com.example.ingsw2022.ratatuille.Model;
 
 
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,6 +30,17 @@ public class Ordine {
     private String piattiOrdinati;
     
     private boolean pagato;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private LocalDate dataOrdine;
+
+    public LocalDate getDataOrdine() {
+        return this.dataOrdine;
+    }
+
+    public void setDataOrdine(LocalDate dataOrdine) {
+        this.dataOrdine = dataOrdine;
+    }
 
     private int conto;
 
