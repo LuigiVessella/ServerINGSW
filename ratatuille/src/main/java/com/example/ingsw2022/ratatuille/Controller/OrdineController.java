@@ -2,6 +2,8 @@ package com.example.ingsw2022.ratatuille.Controller;
 
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,8 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.ingsw2022.ratatuille.Model.Cameriere;
 import com.example.ingsw2022.ratatuille.Model.Ordine;
+import com.example.ingsw2022.ratatuille.Model.Ristorante;
 import com.example.ingsw2022.ratatuille.Repository.CameriereRepository;
 import com.example.ingsw2022.ratatuille.Repository.OrdineRepository;
+import com.example.ingsw2022.ratatuille.Repository.RistoranteRepository;
 
 
 @RestController
@@ -22,11 +26,14 @@ public class OrdineController {
 
     private final OrdineRepository ordineRepository;
     private final CameriereRepository cameriereRepository;
+    private final RistoranteRepository ristoranteRepository;
 
-    public OrdineController(OrdineRepository ordineRepository, CameriereRepository cameriereRepository) {
+    public OrdineController(OrdineRepository ordineRepository, CameriereRepository cameriereRepository, RistoranteRepository ristoranteRepository) {
         this.ordineRepository = ordineRepository;
         this.cameriereRepository = cameriereRepository;
+        this.ristoranteRepository = ristoranteRepository;
     }
+
 
     @GetMapping("/getAll")
     public @ResponseBody Iterable<Ordine> getAll(){
@@ -54,4 +61,11 @@ public class OrdineController {
         return "done";
     }
     
+    @GetMapping("/getOrdiniRistorante/{id_ristorante}")
+    public @ResponseBody List<Cameriere> getOrdiniPerRistorante(@PathVariable Long id_ristorante) {
+        Ristorante ristorante = ristoranteRepository.findById(id_ristorante).get();
+        return ristorante.getCamerieri();
+
+
+    }
 }
