@@ -62,4 +62,17 @@ public class CameriereController {
     public @ResponseBody Ristorante getRistoranteCameriere(@PathVariable String id) {
         return cameriereRepository.findById(id).get().getRistorante();
     }
+
+    @PostMapping("/changePassword/{id}")
+    public @ResponseBody String changePassword(@PathVariable String id, @RequestParam String passNew){
+        Optional<Cameriere> adminOpt = cameriereRepository.findById(id);
+        Cameriere admin = adminOpt.get();
+        if(admin != null) {
+            admin.setHashedPassword(passNew);
+            cameriereRepository.save(admin);
+            return "new_pass_saved";
+        }
+       else return "error";
+    }
+    
 }
