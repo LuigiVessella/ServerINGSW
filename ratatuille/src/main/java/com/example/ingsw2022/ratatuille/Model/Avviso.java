@@ -31,9 +31,19 @@ public class Avviso {
     @Column(columnDefinition="TEXT", length = 2048)
     private String descrizione;
 
-    private boolean letto;
 
-    private Integer lettoCounter;
+    @Column(columnDefinition="TEXT", length = 2048)
+    private String lettoDa;
+
+    public String getLettoDa() {
+        return this.lettoDa;
+    }
+
+    public void setLettoDa(String lettoDa) {
+        this.lettoDa = lettoDa;
+    }
+
+    
 
     @ManyToOne
     @JoinColumn(name = "codice_ristorante")
@@ -58,7 +68,7 @@ public class Avviso {
     
    
     public Avviso(){
-        letto = false;
+        
     }
 
 
@@ -71,25 +81,6 @@ public class Avviso {
         this.descrizione = descrizione;
     }
 
-    public boolean isLetto() {
-        return this.letto;
-    }
-
-    public boolean getLetto() {
-        return this.letto;
-    }
-
-    public void setLetto(boolean letto) {
-        this.letto = letto;
-    }
-
-    public Integer getLettoCounter() {
-        return this.lettoCounter;
-    }
-
-    public void setLettoCounter(Integer lettoCounter) {
-        this.lettoCounter = lettoCounter;
-    }
 
     
     public LocalDate getDataEmissione() {

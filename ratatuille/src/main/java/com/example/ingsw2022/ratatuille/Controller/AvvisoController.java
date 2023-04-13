@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.ingsw2022.ratatuille.Model.Avviso;
@@ -38,6 +37,7 @@ public class AvvisoController {
         Avviso avviso = new Avviso();
         avviso.setDescrizione(descrizione);
         avviso.setRistorante(getRistorante);
+        avviso.setLettoDa("");
         avviso.setDataEmissione(LocalDate.now());
         avviso.setOraEmissione(LocalTime.now());
         avvisoRepository.save(avviso);
