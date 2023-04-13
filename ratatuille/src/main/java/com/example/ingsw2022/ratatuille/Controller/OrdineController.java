@@ -60,11 +60,19 @@ public class OrdineController {
         ordineRepository.save(ordine);
         return "done";
     }
+
+    @PostMapping("/setSollecitato/{id_ordine}")
+    public @ResponseBody String setOrdineSollecitato(@PathVariable String id_ordine){
+        Ordine ordine = ordineRepository.findById(Long.parseLong(id_ordine)).get();
+        ordine.setSollecitato(true);
+        ordineRepository.save(ordine);
+        return "done";
+    }
     
     @GetMapping("/getOrdiniRistorante/{id_ristorante}")
-    public @ResponseBody List<Cameriere> getOrdiniPerRistorante(@PathVariable Long id_ristorante) {
+    public @ResponseBody Ristorante getOrdiniPerRistorante(@PathVariable Long id_ristorante) {
         Ristorante ristorante = ristoranteRepository.findById(id_ristorante).get();
-        return ristorante.getCamerieri();
+        return ristorante;
 
 
     }

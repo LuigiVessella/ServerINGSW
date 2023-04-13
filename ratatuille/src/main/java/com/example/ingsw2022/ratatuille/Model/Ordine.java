@@ -31,6 +31,20 @@ public class Ordine {
     
     private boolean pagato;
 
+    private boolean sollecitato;
+
+    public boolean isSollecitato() {
+        return this.sollecitato;
+    }
+
+    public boolean getSollecitato() {
+        return this.sollecitato;
+    }
+
+    public void setSollecitato(boolean sollecitato) {
+        this.sollecitato = sollecitato;
+    }
+
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate dataOrdine;
 
