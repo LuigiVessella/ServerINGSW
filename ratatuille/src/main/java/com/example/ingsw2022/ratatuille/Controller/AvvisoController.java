@@ -29,7 +29,7 @@ public class AvvisoController {
     public AvvisoController(RistoranteRepository ristoranteRepository, AvvisoRepository avvisoRepository) {
         this.ristoranteRepository = ristoranteRepository;
         this.avvisoRepository = avvisoRepository;
-        counterAvvisi = 0;
+        counterAvvisi = -1;
     }
 
 
@@ -60,6 +60,12 @@ public class AvvisoController {
             return "no_new_alerts";
         }
         
+    }
+
+    @GetMapping("/getAvvisiList/{ristorante_id}")
+    public @ResponseBody List<Avviso> getAvvisiList(@PathVariable Long ristorante_id) {
+        Ristorante ristorante = ristoranteRepository.findById(ristorante_id).get();
+        return ristorante.getAvvisi();
     }
 
 }
