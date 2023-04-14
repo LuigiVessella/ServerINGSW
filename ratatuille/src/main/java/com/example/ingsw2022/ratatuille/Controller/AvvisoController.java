@@ -23,11 +23,13 @@ public class AvvisoController {
 
     private final RistoranteRepository ristoranteRepository;
     private final AvvisoRepository avvisoRepository;
+    private int counterAvvisi;
 
 
     public AvvisoController(RistoranteRepository ristoranteRepository, AvvisoRepository avvisoRepository) {
         this.ristoranteRepository = ristoranteRepository;
         this.avvisoRepository = avvisoRepository;
+        counterAvvisi = 0;
     }
 
 
@@ -46,9 +48,18 @@ public class AvvisoController {
 
 
     @GetMapping("/getAvvisi/{ristorante_id}")
-    public @ResponseBody List<Avviso> getAvvisi(@PathVariable Long ristorante_id) {
+    public @ResponseBody String getAvvisi(@PathVariable Long ristorante_id) {
         Ristorante ristorante = ristoranteRepository.findById(ristorante_id).get();
-        return ristorante.getAvvisi();
+        if(ristorante.getAvvisi().size() > counterAvvisi) {
+            System.out.println("ci sono nuovi avvisi\n");
+            counterAvvisi = ristorante.getAvvisi().size();
+            return "new_alerts";
+        }
+        else {
+            
+            return "no_new_alerts";
+        }
+        
     }
 
 }
