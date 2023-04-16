@@ -7,8 +7,7 @@ import jakarta.persistence.MappedSuperclass;
 @MappedSuperclass
 public class Lavoratore {
     @Id
-    private String codiceFiscale; 
-    
+    private String codiceFiscale;     
     private String nome;
     private String cognome;
 
@@ -16,11 +15,8 @@ public class Lavoratore {
     private String email;
 
     private String hashedPassword;
-    private String firstPassword; 
+  
     private String ruolo; //che può essere, admin, cameriere, addettocucina
-
-
-
 
     public Lavoratore() {
     }
@@ -63,15 +59,6 @@ public class Lavoratore {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-
-    public String getFirstPassword() {
-        return this.firstPassword;
-    }
-
-    public void setFirstPassword(String firstPassword) {
-        this.firstPassword = firstPassword;
     }
 
     public String getRuolo() {
