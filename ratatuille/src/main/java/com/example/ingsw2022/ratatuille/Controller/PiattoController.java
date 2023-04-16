@@ -43,6 +43,8 @@ public class PiattoController {
             newPiatto.setTipo(tipo);
             newPiatto.setTipoPietanza(tipoPietanza);
             newPiatto.setMenu(menu);
+            menu.getPortate().add(newPiatto);
+            
             piattoRepository.save(newPiatto);
             return menu;
         }

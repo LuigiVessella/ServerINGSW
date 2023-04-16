@@ -3,6 +3,7 @@ package com.example.ingsw2022.ratatuille.Model;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,6 +27,7 @@ public class Ristorante {
 
     private String locazione;
 
+    @Column(nullable = false, unique = true)
     private String numeroTelefono;
 
     private boolean locTuristica;
@@ -84,7 +86,7 @@ public class Ristorante {
     private AddettoCucina addetto_cucina;
 
 
-    //ristorate ha lista di menu 1 a molti
+    //ristorate ha lista di menu 1 a 1
     @OneToOne(mappedBy = "ristorante",  cascade = CascadeType.ALL, orphanRemoval = true)
     private Menu menu;
 

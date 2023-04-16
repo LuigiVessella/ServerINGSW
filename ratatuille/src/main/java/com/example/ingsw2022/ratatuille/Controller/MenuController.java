@@ -32,16 +32,15 @@ public class MenuController {
         Optional<Ristorante> ristoranteOpt = ristoranteRepository.findById(codice_ristorante);
         Ristorante ristorante = ristoranteOpt.get();
 
-        if(ristorante != null) {
-            Menu menu = new Menu();
-            menu.setLingua(lingua);
-            menu.setRistorante(ristorante);
-            menu.setPortate(null);
-            menu.setTipo(tipo);
-            menu.setNome(nome);
-            menuRepository.save(menu);
+        Menu menu = new Menu();
+        menu.setLingua(lingua);
+        menu.setRistorante(ristorante);
+        menu.setPortate(null);
+        menu.setTipo(tipo);
+        menu.setNome(nome);
+        ristorante.setMenu(menu);
+        if(menuRepository.save(menu) != null)
             return ristorante;
-        }
 
         else return null;
     }

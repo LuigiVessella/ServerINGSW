@@ -59,6 +59,7 @@ public class LavoratoreController {
             supervisore.setRuolo(ruolo);
             supervisore.setNumeroAvvisi(0);
             supervisoreRepository.save(supervisore);
+            ristorante.setSupervisore(supervisore);
             return ristorante;
         
         }
@@ -74,6 +75,7 @@ public class LavoratoreController {
             addettoCucina.setNumeroOrdiniEvasi(0);
             addettoCucina.setRuolo(ruolo);
             addettoCucinaRepository.save(addettoCucina);
+            ristorante.setAddettoCucina(addettoCucina);
             return ristorante;
         
         }

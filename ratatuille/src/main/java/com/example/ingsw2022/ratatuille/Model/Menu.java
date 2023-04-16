@@ -33,7 +33,6 @@ public class Menu {
 
     private String nome;
 
-
     private String tipo; 
     private String lingua;  
 
