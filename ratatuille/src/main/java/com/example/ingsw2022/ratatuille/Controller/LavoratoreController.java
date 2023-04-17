@@ -48,6 +48,7 @@ public class LavoratoreController {
             cameriereRepository.save(cameriere);
             return ristorante;
         }
+        
         else if(ruolo.equals("supervisore")) {
             Supervisore supervisore = new Supervisore();
             supervisore.setNome(nome);

@@ -26,6 +26,7 @@ public class Avviso {
     @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate dataEmissione;
 
+    @JsonFormat(pattern = "hh:mm")
     private LocalTime oraEmissione; 
 
     @Column(columnDefinition="TEXT", length = 2048)
@@ -34,6 +35,16 @@ public class Avviso {
 
     @Column(columnDefinition="TEXT", length = 2048)
     private String lettoDa;
+
+    private String emessoDa; //o admin o supervisore
+
+    public String getEmessoDa() {
+        return this.emessoDa;
+    }
+
+    public void setEmessoDa(String emessoDa) {
+        this.emessoDa = emessoDa;
+    }
 
     public String getLettoDa() {
         return this.lettoDa;

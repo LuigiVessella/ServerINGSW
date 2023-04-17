@@ -2,6 +2,7 @@ package com.example.ingsw2022.ratatuille.Controller;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,11 +35,13 @@ public class AvvisoController {
 
 
     @PostMapping("/addNew/{ristorante_id}")
-    public @ResponseBody Ristorante addNewAvviso(@PathVariable String ristorante_id, @RequestParam String descrizione){
+    public @ResponseBody Ristorante addNewAvviso(@PathVariable String ristorante_id, @RequestParam String descrizione, @RequestParam String emessoDa){
+       
         Ristorante getRistorante = ristoranteRepository.findById(Long.parseLong(ristorante_id)).get();
         Avviso avviso = new Avviso();
         avviso.setDescrizione(descrizione);
         avviso.setRistorante(getRistorante);
+        avviso.setEmessoDa(emessoDa);
         avviso.setLettoDa("");
         avviso.setDataEmissione(LocalDate.now());
         avviso.setOraEmissione(LocalTime.now());
