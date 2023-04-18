@@ -71,4 +71,12 @@ public class AvvisoController {
         return ristorante.getAvvisi();
     }
 
+    @PostMapping("/setLettoDa/{avviso_id}")
+    public @ResponseBody String setLettoDa(@PathVariable Long avviso_id, @RequestParam String cod_fisc) {
+        Avviso avviso_to_edit = avvisoRepository.findById(avviso_id).get();
+        avviso_to_edit.setLettoDa(avviso_to_edit.getLettoDa().concat(cod_fisc));
+        avvisoRepository.save(avviso_to_edit);
+        return "ok_letto_saved";
+    }
+
 }
