@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PreRemove;
 
 @Entity
 public class Piatto {
@@ -42,6 +43,9 @@ public class Piatto {
     public Piatto() {
 
     }
+
+
+
 
 
     public String getNome_piatto() {

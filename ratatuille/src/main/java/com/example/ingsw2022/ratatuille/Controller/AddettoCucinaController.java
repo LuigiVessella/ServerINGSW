@@ -16,6 +16,8 @@ import com.example.ingsw2022.ratatuille.Model.Ristorante;
 import com.example.ingsw2022.ratatuille.Repository.AddettoCucinaRepository;
 import com.example.ingsw2022.ratatuille.Repository.RistoranteRepository;
 
+import jakarta.transaction.Transactional;
+
 @RestController
 @RequestMapping("/addettocucina/")
 public class AddettoCucinaController {
@@ -47,6 +49,23 @@ public class AddettoCucinaController {
             return "new_pass_saved";
         }
        else return "error";
+    }
+
+
+    @PostMapping("/deleteAddettoCucina")
+    @Transactional
+    public @ResponseBody String deleteMenu(@RequestParam String addetto_id) {
+        AddettoCucina addettoCucina =  addettoCucinaRepository.findById(addetto_id).get();
+        addettoCucina.setRistorante(null);
+        
+        try{
+            addettoCucinaRepository.delete(addettoCucina);
+        }
+        catch(IllegalArgumentException e) {
+            return "addetto_not_delete";
+        }
+        
+        return "addetto_deleted";
     }
     
 }

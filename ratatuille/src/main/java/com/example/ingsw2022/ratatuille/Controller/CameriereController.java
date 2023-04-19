@@ -11,9 +11,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.ingsw2022.ratatuille.Model.Cameriere;
+import com.example.ingsw2022.ratatuille.Model.Ordine;
 import com.example.ingsw2022.ratatuille.Model.Ristorante;
 import com.example.ingsw2022.ratatuille.Repository.CameriereRepository;
+import com.example.ingsw2022.ratatuille.Repository.OrdineRepository;
 import com.example.ingsw2022.ratatuille.Repository.RistoranteRepository;
+
+import jakarta.transaction.Transactional;
 
 @RestController
 @RequestMapping("/camerieri")
@@ -21,12 +25,15 @@ public class CameriereController {
     
     private final CameriereRepository cameriereRepository;
     private final RistoranteRepository ristoranteRepository;
+    private final OrdineRepository ordineRepository;
 
 
-    public CameriereController(CameriereRepository cameriereRepository, RistoranteRepository ristoranteRepository) {
+    public CameriereController(CameriereRepository cameriereRepository, RistoranteRepository ristoranteRepository, OrdineRepository ordineRepository) {
         this.cameriereRepository = cameriereRepository;
         this.ristoranteRepository = ristoranteRepository;
+        this.ordineRepository = ordineRepository;
     }
+
 
     @GetMapping("/getAll")
     public @ResponseBody List<Cameriere> getAllCamerieri() {
@@ -73,6 +80,29 @@ public class CameriereController {
             return "new_pass_saved";
         }
        else return "error";
+    }
+
+
+    @PostMapping("/deleteCameriere")
+    @Transactional
+    public @ResponseBody String deleteMenu(@RequestParam String cameriere_id) {
+        Cameriere cameriere =  cameriereRepository.findById(cameriere_id).get();
+        cameriere.setRistorante(null);
+        String cod_fisc = cameriere.getCodiceFiscale();
+        
+        for(Ordine p : cameriere.getOrdini()) {    
+            p.setCameriere(null);
+            ordineRepository.delete(p);
+        }
+        
+        try{
+            cameriereRepository.delete(cameriere);
+        }
+        catch(IllegalArgumentException e) {
+            return "cameriere_not_delete";
+        }
+        
+        return "cameriere_deleted"+cod_fisc;
     }
     
 }

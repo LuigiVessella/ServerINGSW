@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PreRemove;
 
 
 @Entity

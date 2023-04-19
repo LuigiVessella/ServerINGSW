@@ -15,6 +15,8 @@ import com.example.ingsw2022.ratatuille.Model.Supervisore;
 import com.example.ingsw2022.ratatuille.Repository.CameriereRepository;
 import com.example.ingsw2022.ratatuille.Repository.SupervisoreRepository;
 
+import jakarta.transaction.Transactional;
+
 @RestController
 @RequestMapping("/supervisore")
 public class SupervisoreController {
@@ -46,6 +48,24 @@ public class SupervisoreController {
             return "new_pass_saved";
         }
        else return "error";
+    }
+
+
+
+    @PostMapping("/deleteSupervisore")
+    @Transactional
+    public @ResponseBody String deleteMenu(@RequestParam String supervisore_id) {
+        Supervisore supervisore =  supervisoreRepository.findById(supervisore_id).get();
+        supervisore.setRistorante(null);
+        
+        try{
+            supervisoreRepository.delete(supervisore);
+        }
+        catch(IllegalArgumentException e) {
+            return "supervisore_not_delete";
+        }
+        
+        return "supervisore_deleted";
     }
     
 }
