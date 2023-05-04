@@ -28,7 +28,7 @@ public class PiattoController {
 
 
     @PostMapping("/addPiatto")
-    public @ResponseBody Menu addNewPiatto(@RequestParam String nome_piatto, @RequestParam String descrizione, @RequestParam String prezzo, @RequestParam String allergeni, @RequestParam String contiene, @RequestParam Long codice_menu, @RequestParam String tipo, @RequestParam String tipoPietanza){
+    public @ResponseBody Menu addNewPiatto(@RequestParam String nome_piatto, @RequestParam String descrizione, @RequestParam String descr_sec, @RequestParam String prezzo, @RequestParam String allergeni, @RequestParam String contiene, @RequestParam Long codice_menu, @RequestParam String tipo, @RequestParam String tipoPietanza){
         
         Optional<Menu> menuOpt = menuRepository.findById(codice_menu);
         Menu menu = menuOpt.get();
@@ -42,6 +42,7 @@ public class PiattoController {
             newPiatto.setPrezzo(prezzo);
             newPiatto.setTipo(tipo);
             newPiatto.setTipoPietanza(tipoPietanza);
+            newPiatto.setSecond_descr(descr_sec);
             newPiatto.setMenu(menu);
             menu.getPortate().add(newPiatto);
             

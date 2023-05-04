@@ -25,6 +25,11 @@ public class Piatto {
     @Column(columnDefinition="TEXT", length = 2048)
     private String descrizione;
 
+    @Column(columnDefinition="TEXT", length = 2048)
+    private String second_descr;
+
+
+
     private String allergeni;
 
     @Column(columnDefinition="TEXT", length = 2048)
@@ -118,6 +123,15 @@ public class Piatto {
 
     public void setTipoPietanza(String tipoPietanza) {
         this.tipoPietanza = tipoPietanza;
+    }
+
+
+    public String getSecond_descr() {
+        return this.second_descr;
+    }
+
+    public void setSecond_descr(String second_descr) {
+        this.second_descr = second_descr;
     }
 
 
