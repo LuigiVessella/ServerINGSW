@@ -54,7 +54,7 @@ public class SupervisoreController {
 
     @PostMapping("/deleteSupervisore")
     @Transactional
-    public @ResponseBody String deleteMenu(@RequestParam String supervisore_id) {
+    public @ResponseBody String deleteSupervisore(@RequestParam String supervisore_id) {
         Supervisore supervisore =  supervisoreRepository.findById(supervisore_id).get();
         supervisore.setRistorante(null);
         
@@ -69,3 +69,4 @@ public class SupervisoreController {
     }
     
 }
+
